@@ -4,27 +4,28 @@ import Landing from "../components/Landing/Landing";
 import FeaturedItems from "../components/Featured/Items/FetauredItems";
 import FeaturedCategories from "../components/Featured/Categories/FeaturedCategories";
 import { TabTitle } from "../utils/General";
+import API_CONFIG from '../config/api.js';
 
 
 const Home = () => {
-    const [ featuredItems, setFeaturedItems ] = useState()
-    TabTitle("Home - Shema");
+    const [featuredItems, setFeaturedItems] = useState()
+    TabTitle("Home - Market Mingle");
 
     useEffect(() => {
-        axios.get("https://shema-backend.vercel.app/api/items")
+        axios.get(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.ITEMS}`)
             .then(res => setFeaturedItems(res.data))
             .catch(err => console.log(err))
 
         window.scrollTo(0, 0)
     }, [])
 
-    return ( 
+    return (
         <Fragment>
             <Landing />
             <FeaturedCategories />
-            <FeaturedItems items={featuredItems}/>
+            <FeaturedItems items={featuredItems} />
         </Fragment>
     );
 }
- 
+
 export default Home;
