@@ -6,7 +6,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "vercel-build": "echo 'Build step completed'"
   },
   "author": "Rakesh Kumar",
   "license": "ISC",

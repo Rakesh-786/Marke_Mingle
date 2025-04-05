@@ -10,8 +10,17 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static("public"));
 
+// Health check endpoint that doesn't require database access
+app.get('/', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'Market Mingle API is running' });
+});
+
 // connect to the mongodb database
-connectDB()
+try {
+    connectDB();
+} catch (error) {
+    console.error('MongoDB connection error:', error);
+}
 
 app.use('/api/items', require("./routes/items"))
 app.use('/api/payment', cors(), require("./routes/payment"))
